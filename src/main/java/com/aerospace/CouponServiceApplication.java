@@ -2,13 +2,13 @@ package com.aerospace;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @SpringBootApplication
-@EnableEurekaClient
+//@EnableEurekaClient
 public class CouponServiceApplication {
 
     public static void main(String[] args) {

@@ -16,6 +16,11 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Bas
     protected AbstractController(S service){
         this.service = service;
     }
+
+    public S getService() {
+       return this.service;
+    }
+
     @Override
     public ResponseEntity<E> handleSave(@RequestBody E entity) throws Exception {
         E e =  service.save(entity);
