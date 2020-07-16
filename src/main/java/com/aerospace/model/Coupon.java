@@ -15,4 +15,6 @@ public class Coupon extends AbstractEntity<Long> {
     private BigDecimal discount;
     @Column(name="exp_date")
     private String expiryDate;
+    @Transient
+    private boolean active;
 }
