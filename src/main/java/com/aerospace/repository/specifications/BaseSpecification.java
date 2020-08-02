@@ -1,6 +1,5 @@
 package com.aerospace.repository.specifications;
 
-import com.aerospace.model.Item;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -10,6 +9,13 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * BaseSpecification which defines the criteria query for the Domain Driven
+ *
+ * @author Ramanujam (CEI)
+ *
+ */
+
 public abstract class BaseSpecification<T> implements Specification<T> {
 
     private List<SearchCriteria> list;
@@ -18,6 +24,10 @@ public abstract class BaseSpecification<T> implements Specification<T> {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds the criteria to be used in the query.
+     * @param criteria
+     */
     public void add(SearchCriteria criteria) {
         list.add(criteria);
     }
@@ -28,7 +38,7 @@ public abstract class BaseSpecification<T> implements Specification<T> {
         List<Predicate> predicates = new ArrayList<>();
 
         //add add criteria to predicates
-        for (SearchCriteria criteria : list) {
+        list.forEach(criteria -> {
             if (criteria.getOperation().equals(SearchOperation.GREATER_THAN)) {
                 predicates.add(criteriaBuilder.greaterThan(
                         root.get(criteria.getKey()), criteria.getValue().toString()));
@@ -47,15 +57,15 @@ public abstract class BaseSpecification<T> implements Specification<T> {
             } else if (criteria.getOperation().equals(SearchOperation.EQUAL)) {
                 predicates.add(criteriaBuilder.equal(
                         root.get(criteria.getKey()), criteria.getValue()));
-            } else if (criteria.getOperation().equals(SearchOperation.MATCH)) {
+            } else if (criteria.getOperation().equals(SearchOperation.CONTAINS)) {
                 predicates.add(criteriaBuilder.like(
                         criteriaBuilder.lower(root.get(criteria.getKey())),
                         "%" + criteria.getValue().toString().toLowerCase() + "%"));
-            } else if (criteria.getOperation().equals(SearchOperation.MATCH_END)) {
+            } else if (criteria.getOperation().equals(SearchOperation.STARTS_WITH)) {
                 predicates.add(criteriaBuilder.like(
                         criteriaBuilder.lower(root.get(criteria.getKey())),
                         criteria.getValue().toString().toLowerCase() + "%"));
-            } else if (criteria.getOperation().equals(SearchOperation.MATCH_START)) {
+            } else if (criteria.getOperation().equals(SearchOperation.ENDS_WITH)) {
                 predicates.add(criteriaBuilder.like(
                         criteriaBuilder.lower(root.get(criteria.getKey())),
                         "%" + criteria.getValue().toString().toLowerCase()));
@@ -64,7 +74,7 @@ public abstract class BaseSpecification<T> implements Specification<T> {
             } else if (criteria.getOperation().equals(SearchOperation.NOT_IN)) {
                 predicates.add(criteriaBuilder.not(root.get(criteria.getKey())).in(criteria.getValue()));
             }
-        }
+        });
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

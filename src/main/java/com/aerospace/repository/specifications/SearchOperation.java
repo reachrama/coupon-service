@@ -1,5 +1,9 @@
 package com.aerospace.repository.specifications;
 
+/**
+ * ENUM which defines the list of operation, which will be performed on the domain object using the
+ * org.springframework.data.jpa.domain.Specification.
+ */
 public enum  SearchOperation {
     GREATER_THAN,
     LESS_THAN,
@@ -7,9 +11,9 @@ public enum  SearchOperation {
     LESS_THAN_EQUAL,
     NOT_EQUAL,
     EQUAL,
-    MATCH,
-    MATCH_START,
-    MATCH_END,
+    CONTAINS,
+    ENDS_WITH,
+    STARTS_WITH,
     IN,
     NOT_IN
 }

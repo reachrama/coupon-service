@@ -24,6 +24,10 @@ public class ItemService extends AbstractService<Item, ItemRepository> {
         return this.repository.findAll(specification);
     }
 
+    public Item findByBarcode(String barcode) {
+        return this.repository.findByBarcode(barcode);
+    }
+
     @Override
     public Item save(Item entity) {
         return null;

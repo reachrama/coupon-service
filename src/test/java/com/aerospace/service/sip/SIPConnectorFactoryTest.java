@@ -1,7 +1,10 @@
 package com.aerospace.service.sip;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SIPConnectorFactoryTest {
 
     @Test
