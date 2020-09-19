@@ -1,5 +1,7 @@
 package com.aerospace.service.sip;
 
+import org.springframework.stereotype.Component;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

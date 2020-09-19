@@ -1,5 +1,7 @@
 package com.aerospace.controller;
 
+import com.aerospace.service.ils.AbstractProtocolConnector;
+import com.aerospace.service.ils.ILSProtocolConnectorFactory;
 import com.aerospace.service.sip.ILSAbstractSIPProtocol;
 import com.aerospace.service.sip.SIPConnectorFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +21,25 @@ public class ILSConfigurationController {
     @Autowired
     private SIPConnectorFactory sipConnectorFactory;
 
+    @Autowired
+    private ILSProtocolConnectorFactory ilsProtocolConnectorFactory;
+
     @GetMapping("/network/url")
     public ResponseEntity<String> handleGetAllFromCsv() throws IOException {
 
-        ILSAbstractSIPProtocol jSIPProtocol = sipConnectorFactory.createSIPConnector("SIP", "nypl");
+
+      AbstractProtocolConnector connector = ilsProtocolConnectorFactory
+                .getIlsProtocolConnector("Rest");
+
+        return ResponseEntity.ok().body(connector.lookupItem("abc"));
+
+    }
+
+    @GetMapping("/network/url1")
+    public ResponseEntity<String> handleGetAllFromCsv1() throws IOException {
+
+
+       ILSAbstractSIPProtocol jSIPProtocol = sipConnectorFactory.createSIPConnector("SIP", "nypl");
         log.info("*******************");
         return ResponseEntity.ok().body(jSIPProtocol.lookupItem("abc"));
     }

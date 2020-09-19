@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "ils.network")
+@ConfigurationProperties(prefix = "ils1.network")
 @Data
 @Component
 public class ILSConfiguration {
