@@ -16,16 +16,8 @@ import java.util.List;
 @Slf4j
 public class CouponService extends AbstractService<Coupon, CouponRepository> {
 
-    private ParserFactory parserFactory;
-
     public CouponService(CouponRepository repository) {
         super(repository);
-    }
-
-    @Autowired
-    public CouponService(CouponRepository repository, ParserFactory parserFactory) {
-        this(repository);
-        this.parserFactory = parserFactory;
     }
 
     @Override
@@ -34,17 +26,9 @@ public class CouponService extends AbstractService<Coupon, CouponRepository> {
     }
 
     @Override
-    public List<Coupon> getAll(ParserContentType contentType) throws IOException {
-        String fileName = contentType.fileName();
-        log.info("Fetching list from file {}", fileName);
-
-        return parserFactory
-                .getParser(contentType)
-                .parse(getFileHandle(fileName));
+    public List<Coupon> fetchAll() throws IOException {
+        return this.repository.findAll();
     }
 
-    private Reader getFileHandle(String fileName) {
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream(fileName);
-        return new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-    }
+
 }

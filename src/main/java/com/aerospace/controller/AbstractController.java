@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+import reactor.core.publisher.Flux;
+
 public abstract class AbstractController<E extends AbstractEntity, S extends BaseService<E>>
     implements BaseController<E> {
 
@@ -29,5 +31,13 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Bas
         return  new ResponseEntity<E>(e,HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<E> handleFetchAllBlocking() {
+        return null;
+    }
 
+    @Override
+    public Flux<E> handleFetchAllNonBlocking() {
+        return null;
+    }
 }

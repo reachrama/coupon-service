@@ -38,7 +38,7 @@ public class RequestItemService  extends AbstractService<RequestItem, RequestIte
     }
 
     @Override
-    public List<RequestItem> getAll(ParserContentType contentType) throws IOException {
+    public List<RequestItem> fetchAll() throws IOException {
         return null;
     }
 }

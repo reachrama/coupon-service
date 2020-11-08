@@ -34,7 +34,8 @@ public class ItemService extends AbstractService<Item, ItemRepository> {
     }
 
     @Override
-    public List<Item> getAll(ParserContentType contentType) throws IOException {
+    public List<Item> fetchAll() throws IOException {
         return null;
     }
+
 }

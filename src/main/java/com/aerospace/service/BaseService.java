@@ -9,7 +9,7 @@ import java.util.List;
 public interface BaseService<E extends AbstractEntity> {
     E save(E entity);
 
-    List<E> getAll(ParserContentType contentType) throws IOException;
+    List<E> fetchAll() throws IOException;
 }
 
 
