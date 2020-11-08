@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.IOException;
 import java.util.List;
 
 import reactor.core.publisher.Flux;
@@ -32,12 +33,9 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Bas
     }
 
     @Override
-    public ResponseEntity<E> handleFetchAllBlocking() {
-        return null;
+    public ResponseEntity<List<E>> handleFetchAllBlocking() throws IOException {
+        List<E> entityList = service.fetchAll();
+        return new ResponseEntity<List<E>>(entityList, HttpStatus.OK);
     }
 
-    @Override
-    public Flux<E> handleFetchAllNonBlocking() {
-        return null;
-    }
 }

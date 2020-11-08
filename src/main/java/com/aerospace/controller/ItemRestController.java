@@ -37,11 +37,6 @@ public class ItemRestController extends AbstractController<Item, ItemService> {
         super(service);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Item>> handleGetAll() {
-        List<Item> itemList = this.getService().getAll();
-        return  ResponseEntity.ok().body( itemList );
-    }
 
     @GetMapping("/institute/{instituteId}")
     public ResponseEntity<List<Item>> handleFetchByInstitution(@PathVariable String instituteId) {
